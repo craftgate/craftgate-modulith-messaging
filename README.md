@@ -11,8 +11,11 @@ This repository contains a Java based messaging API for communication between mo
 
 ## Getting Started
 
-Clone the repository to your local machine and import it as a Gradle project in your preferred IDE. You can then build and run the API on your local environment.
-Prerequisites
+Clone the repository to your local machine and copy messaging api to your project and use. You can then build and run the API on your local environment.
+
+## Prerequisites
+
+Used technologies in the codebase:
 
 * Java 17
 * Gradle 7.6
@@ -22,6 +25,10 @@ Prerequisites
 ## Contributing
 
 If you wish to contribute to this repository, please fork the repository, make your changes and create a pull request.
+
+## Code of Conduct
+
+Please take a look at [code of conduct](CODE_OF_CONDUCT.md) before opening issues or creating pull requests.
 
 ## License
 
