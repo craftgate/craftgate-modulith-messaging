@@ -24,7 +24,6 @@ dependencies {
     testImplementation 'org.assertj:assertj-core:3.23.1'
 
     implementation 'org.springframework:spring-tx:6.0.3'
-    implementation 'org.springframework:spring-aop:6.0.3'
 
     testImplementation 'org.springframework:spring-tx:6.0.3'
     testImplementation 'mysql:mysql-connector-java:8.0.30'
