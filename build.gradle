@@ -1,0 +1,82 @@
+plugins {
+    id 'java'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'com.google.guava:guava:31.1-jre'
+
+    compileOnly 'ch.qos.logback:logback-classic:1.4.5'
+    testImplementation 'ch.qos.logback:logback-classic:1.4.5'
+
+    annotationProcessor 'org.projectlombok:lombok:1.18.24'
+    compileOnly 'org.projectlombok:lombok:1.18.24'
+
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.24'
+    testImplementation 'org.projectlombok:lombok:1.18.24'
+
+    compileOnly 'org.slf4j:jcl-over-slf4j:2.0.6'
+    compileOnly  'org.slf4j:log4j-over-slf4j:2.0.6'
+    compileOnly  'org.slf4j:slf4j-api:2.0.6'
+    testImplementation 'org.assertj:assertj-core:3.23.1'
+
+    implementation 'org.springframework:spring-tx:6.0.3'
+    implementation 'org.springframework:spring-aop:6.0.3'
+
+    testImplementation 'org.springframework:spring-tx:6.0.3'
+    testImplementation 'mysql:mysql-connector-java:8.0.30'
+    testImplementation 'com.zaxxer:HikariCP:5.0.1'
+    testImplementation 'org.springframework.boot:spring-boot-starter-web:3.0.1'
+    testImplementation 'org.springframework.boot:spring-boot-starter-data-jpa:3.0.1'
+    testImplementation ('org.springframework.boot:spring-boot-starter-test:3.0.1') {
+        exclude group: 'junit'
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
+}
+
+version = '0.1.0'
+
+testing {
+    suites {
+        test {
+            useJUnitJupiter('5.9.1')
+        }
+    }
+}
+
+project.test {
+    def outputCache = new LinkedList<String>()
+
+    beforeTest { TestDescriptor td -> outputCache.clear() }    // clear everything right before the test starts
+
+    onOutput { TestDescriptor td, TestOutputEvent toe ->       // when output is coming put it in the cache
+        outputCache.add(toe.getMessage())
+        while (outputCache.size() > 1000) outputCache.remove() // if we have more than 1000 lines -> drop first
+    }
+
+    afterTest { TestDescriptor td, TestResult tr ->
+        if (tr.resultType == TestResult.ResultType.FAILURE && outputCache.size() > 0) {
+            println()
+            println(" Output of ${td.className}.${td.name}:")
+            outputCache.each { print(" > $it") }
+        }
+    }
+}
+
+tasks.withType(Test) {
+    testLogging {
+        events 'passed', 'failed', 'skipped'
+        exceptionFormat = 'full'
+        afterSuite { desc, result ->
+            if (!desc.parent) {
+                println ""
+                println """*****> Results: ${result.resultType} (${result.testCount} tests, ${
+                    result.successfulTestCount
+                } successes, ${result.failedTestCount} failures, ${result.skippedTestCount} skipped) <*****"""
+            }
+        }
+    }
+}

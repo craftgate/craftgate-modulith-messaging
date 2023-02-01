@@ -1,0 +1,52 @@
+spring:
+  cloud:
+    config:
+      enabled: false
+  main:
+    allow-bean-definition-overriding: true
+    banner-mode: off
+  jpa:
+    properties:
+      hibernate:
+        temp:
+          use_jdbc_metadata_defaults: false
+    show-sql: true
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    open-in-view: false
+    hibernate:
+      ddl-auto: create
+    defer-datasource-initialization: true
+  sql:
+    init:
+      mode: always
+  datasource:
+    url: jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:4306}/craftgate_modulith_messaging?createDatabaseIfNotExist=true
+    username: root
+    password: my-secret-pw
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      minimum-idle: 5
+      maximum-pool-size: 100
+      idle-timeout: 30000
+      pool-name: SpringBootJPAHikariCP
+      max-lifetime: 2000000
+      connection-timeout: 30000
+    type: com.zaxxer.hikari.HikariDataSource
+  jackson:
+    serialization:
+      INDENT_OUTPUT: true
+    date-format: com.fasterxml.jackson.databind.util.StdDateFormat
+    default-property-inclusion: non_null
+  output:
+    ansi:
+      enabled: ALWAYS
+
+logging:
+  level:
+    io.craftgate: DEBUG
+    org.springframework.orm.jpa: DEBUG
+    com.zaxxer.hikari: WARN
+    reactor.netty: ERROR
+    org.hibernate.tool: WARN
+

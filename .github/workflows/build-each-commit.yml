@@ -1,0 +1,38 @@
+name: Build Each Commit
+
+on:
+  repository_dispatch:
+    types: build-each-commit
+  push:
+    paths:
+      - src/**
+      - build.gradle
+      - .github/workflows/*.yml
+    branches:
+      - master
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+
+      - name: Set Up Java 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Cache gradle dependencies
+        uses: actions/cache@v1
+        with:
+          path: ~/.gradle/caches
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
+
+      - name: Build
+        run: |
+          ./gradlew clean build
