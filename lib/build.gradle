@@ -1,5 +1,5 @@
 plugins {
-    id 'java'
+    id 'java-library'
 }
 
 repositories {
@@ -7,43 +7,40 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.google.guava:guava:31.1-jre'
-
+    compileOnly 'com.google.guava:guava:31.1-jre'
+    compileOnly 'org.springframework:spring-tx:6.0.3'
     compileOnly 'ch.qos.logback:logback-classic:1.4.5'
-    testImplementation 'ch.qos.logback:logback-classic:1.4.5'
-
     annotationProcessor 'org.projectlombok:lombok:1.18.24'
     compileOnly 'org.projectlombok:lombok:1.18.24'
-
-    testAnnotationProcessor 'org.projectlombok:lombok:1.18.24'
-    testImplementation 'org.projectlombok:lombok:1.18.24'
-
     compileOnly 'org.slf4j:jcl-over-slf4j:2.0.6'
     compileOnly  'org.slf4j:log4j-over-slf4j:2.0.6'
     compileOnly  'org.slf4j:slf4j-api:2.0.6'
-    testImplementation 'org.assertj:assertj-core:3.23.1'
 
-    implementation 'org.springframework:spring-tx:6.0.3'
-
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.24'
+    testImplementation 'org.projectlombok:lombok:1.18.24'
     testImplementation 'org.springframework:spring-tx:6.0.3'
-    testImplementation 'mysql:mysql-connector-java:8.0.30'
+    testImplementation 'com.google.guava:guava:31.1-jre'
+    testImplementation 'ch.qos.logback:logback-classic:1.4.5'
+    testImplementation 'org.assertj:assertj-core:3.23.1'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.9.1'
+    testImplementation 'org.springframework:spring-tx:6.0.3'
+    testImplementation 'mysql:mysql-connector-java:8.0.32'
     testImplementation 'com.zaxxer:HikariCP:5.0.1'
-    testImplementation 'org.springframework.boot:spring-boot-starter-web:3.0.1'
-    testImplementation 'org.springframework.boot:spring-boot-starter-data-jpa:3.0.1'
-    testImplementation ('org.springframework.boot:spring-boot-starter-test:3.0.1') {
+    testImplementation 'org.springframework.boot:spring-boot-starter-web:3.0.2'
+    testImplementation 'org.springframework.boot:spring-boot-starter-data-jpa:3.0.2'
+    testImplementation ('org.springframework.boot:spring-boot-starter-test:3.0.2') {
         exclude group: 'junit'
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }
 }
 
-version = '0.1.0'
+java {
+    withSourcesJar()
+    withJavadocJar()
+}
 
-testing {
-    suites {
-        test {
-            useJUnitJupiter('5.9.1')
-        }
-    }
+tasks.named('test') {
+    useJUnitPlatform()
 }
 
 project.test {
