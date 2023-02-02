@@ -13,8 +13,8 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok:1.18.24'
     compileOnly 'org.projectlombok:lombok:1.18.24'
     compileOnly 'org.slf4j:jcl-over-slf4j:2.0.6'
-    compileOnly  'org.slf4j:log4j-over-slf4j:2.0.6'
-    compileOnly  'org.slf4j:slf4j-api:2.0.6'
+    compileOnly 'org.slf4j:log4j-over-slf4j:2.0.6'
+    compileOnly 'org.slf4j:slf4j-api:2.0.6'
 
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.24'
     testImplementation 'org.projectlombok:lombok:1.18.24'
@@ -28,14 +28,14 @@ dependencies {
     testImplementation 'com.zaxxer:HikariCP:5.0.1'
     testImplementation 'org.springframework.boot:spring-boot-starter-web:3.0.2'
     testImplementation 'org.springframework.boot:spring-boot-starter-data-jpa:3.0.2'
-    testImplementation ('org.springframework.boot:spring-boot-starter-test:3.0.2') {
+    testImplementation('org.springframework.boot:spring-boot-starter-test:3.0.2') {
         exclude group: 'junit'
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }
 }
 
 def gitTag = 'git describe --tags --exact-match HEAD 2>/dev/null || true'?.execute([], project.rootDir)?.text?.trim()
-version gitTag ? gitTag?.substring(1) : "SNAPSHOT"
+version((gitTag && gitTag =~ /^v[0-9]+.*$/) ? gitTag?.substring(1) : "SNAPSHOT.${'git rev-parse --short HEAD'?.execute([], project.rootDir)?.text?.trim()}")
 archivesBaseName = rootProject.name
 println "Library: ${archivesBaseName}-${version}"
 
@@ -50,11 +50,11 @@ tasks.named('test') {
 project.test {
     def outputCache = new LinkedList<String>()
 
-    beforeTest { TestDescriptor td -> outputCache.clear() }    // clear everything right before the test starts
+    beforeTest { TestDescriptor td -> outputCache.clear() }
 
-    onOutput { TestDescriptor td, TestOutputEvent toe ->       // when output is coming put it in the cache
+    onOutput { TestDescriptor td, TestOutputEvent toe ->
         outputCache.add(toe.getMessage())
-        while (outputCache.size() > 1000) outputCache.remove() // if we have more than 1000 lines -> drop first
+        while (outputCache.size() > 1000) outputCache.remove()
     }
 
     afterTest { TestDescriptor td, TestResult tr ->

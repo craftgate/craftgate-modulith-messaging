@@ -8,7 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import static io.craftgate.modulith.messaging.api.MessagePublisher.publish;
 
 @Slf4j
-@MessageHandlerConfig(selector = UserNotifiedDomainEvent.class, isChained = true)
+@MessageHandlerConfig(selector = UserNotifiedDomainEvent.class, isChained = true, isTransactional = true)
 public class OutboxUserNotifiedHandler extends VoidMessageHandler<UserNotifiedDomainEvent> {
 
     @Override

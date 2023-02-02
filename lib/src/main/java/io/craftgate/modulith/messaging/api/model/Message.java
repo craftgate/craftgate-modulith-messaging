@@ -1,6 +1,6 @@
 package io.craftgate.modulith.messaging.api.model;
 
-import io.craftgate.modulith.messaging.api.util.CurrentDateTimeProvider;
+import io.craftgate.modulith.messaging.api.util.CurrentDateTimeManager;
 import io.craftgate.modulith.messaging.api.annotation.MessageType;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
@@ -15,13 +15,16 @@ import java.util.UUID;
 public abstract class Message {
 
     @Builder.Default
-    private LocalDateTime messageCreatedAt = CurrentDateTimeProvider.now();
+    private LocalDateTime messageCreatedAt = CurrentDateTimeManager.now();
 
     @Builder.Default
     private String traceId = UUID.randomUUID().toString();
 
     @Setter
     private String producer;
+
+    @Setter
+    private String key;
 
     @ToString.Include(name = "type")
     public String getType() {

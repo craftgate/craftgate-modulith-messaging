@@ -39,9 +39,4 @@ public class User extends AggregateRoot {
         this.blockExpiryDate = blockExpiryDate;
         this.registerMessage(UserBlockedDomainEvent.of(this));
     }
-
-    @Override
-    public String key() {
-        return username;
-    }
 }

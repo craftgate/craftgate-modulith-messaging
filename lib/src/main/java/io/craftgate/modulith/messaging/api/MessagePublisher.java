@@ -12,13 +12,14 @@ import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Objects;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.FutureTask;
+import java.util.concurrent.*;
 
 @Slf4j
 @ToString
 @DomainComponent
 public class MessagePublisher {
+
+    private static final Executor executor = Executors.newFixedThreadPool(100);
 
     private final MessageHandlerRegistry messageHandlerRegistry;
     private final NoMessageHandlerRegistry noMessageHandlerRegistry;
@@ -107,13 +108,12 @@ public class MessagePublisher {
             log.debug("Thread interrupted when message handler ({}) processes message: {}", messageHandler.getClass().getSimpleName(), message, ier);
             Thread.currentThread().interrupt();
             throw new UnableToProcessMessageException("io.craftgate.messaging.processInterrupted", ier);
+        } catch (ExecutionException ex) {
+            log.debug("Error occurred during execution when message handler ({}) processes message: {}", messageHandler.getClass().getSimpleName(), message, ex.getCause());
+            throw (RuntimeException) ex.getCause();
         } catch (Exception e) {
             log.debug("Error occurred when message handler ({}) processes message: {}", messageHandler.getClass().getSimpleName(), message, e);
-            try {
-                throw e;
-            } catch (ExecutionException ex) {
-                throw new UnableToProcessMessageException("io.craftgate.messaging.unableToProcess", ex);
-            }
+            throw e;
         }
     }
 
@@ -130,13 +130,12 @@ public class MessagePublisher {
             log.debug("Thread interrupted when message handler ({}) processes with key: {}", messageHandler.getClass().getSimpleName(), key, ier);
             Thread.currentThread().interrupt();
             throw new UnableToProcessMessageException("io.craftgate.messaging.processInterrupted", ier);
+        } catch (ExecutionException ex) {
+            log.debug("Error occurred during execution when message handler ({}) processes with key: {}", messageHandler.getClass().getSimpleName(), key, ex.getCause());
+            throw (RuntimeException) ex.getCause();
         } catch (Exception e) {
             log.debug("Error occurred when message handler ({}) processes with key: {}", messageHandler.getClass().getSimpleName(), key, e);
-            try {
-                throw e;
-            } catch (ExecutionException ex) {
-                throw new UnableToProcessMessageException("io.craftgate.messaging.unableToProcess", ex);
-            }
+            throw e;
         }
     }
 

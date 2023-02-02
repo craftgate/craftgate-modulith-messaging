@@ -42,9 +42,4 @@ public class User extends AggregateRoot {
     public void doNotify() {
         this.registerMessage(UserNotifiedDomainEvent.of(this));
     }
-
-    @Override
-    public String key() {
-        return username;
-    }
 }

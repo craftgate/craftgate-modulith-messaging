@@ -3,7 +3,7 @@ package io.craftgate.modulith.messaging.test.integration.sample.rollbackchained.
 import io.craftgate.modulith.messaging.api.annotation.MessageType;
 import io.craftgate.modulith.messaging.test.integration.sample.rollbackchained.domain.shared.User;
 import io.craftgate.modulith.messaging.api.model.Message;
-import io.craftgate.modulith.messaging.api.util.CurrentDateTimeProvider;
+import io.craftgate.modulith.messaging.api.util.CurrentDateTimeManager;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
@@ -28,7 +28,7 @@ public class UserCreatedDomainEvent extends Message {
                 .username(user.getUsername())
                 .name(user.getName())
                 .surname(user.getSurname())
-                .registerDate(CurrentDateTimeProvider.now())
+                .registerDate(CurrentDateTimeManager.now())
                 .build();
     }
 }

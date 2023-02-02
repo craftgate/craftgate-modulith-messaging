@@ -4,11 +4,11 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
-public class CurrentDateTimeProvider {
+public class CurrentDateTimeManager {
 
     private static LocalDateTime customLocalDateTime;
 
-    private CurrentDateTimeProvider() {
+    private CurrentDateTimeManager() {
     }
 
     public static LocalDateTime now() {

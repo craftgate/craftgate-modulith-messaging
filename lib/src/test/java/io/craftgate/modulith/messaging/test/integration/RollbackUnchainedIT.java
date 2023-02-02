@@ -1,6 +1,6 @@
 package io.craftgate.modulith.messaging.test.integration;
 
-import io.craftgate.modulith.messaging.test.AbstractTest;
+import io.craftgate.modulith.messaging.test.unit.AbstractUnitTest;
 import io.craftgate.modulith.messaging.test.integration.sample.rollbackunchained.infra.jpa.UserEntity;
 import io.craftgate.modulith.messaging.test.integration.sample.rollbackunchained.RollbackUnchainedApplication;
 import io.craftgate.modulith.messaging.test.integration.sample.rollbackunchained.infra.jpa.UserJpaRepository;
@@ -29,7 +29,7 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
 @ExtendWith(SpringExtension.class)
 @Transactional(propagation = Propagation.NOT_SUPPORTED)
 @SpringBootTest(webEnvironment = RANDOM_PORT, classes = RollbackUnchainedApplication.class)
-public class RollbackUnchainedIT extends AbstractTest {
+public class RollbackUnchainedIT extends AbstractIT {
 
     @Autowired
     private TestRestTemplate testRestTemplate;

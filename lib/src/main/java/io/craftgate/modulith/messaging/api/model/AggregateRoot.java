@@ -1,6 +1,7 @@
 package io.craftgate.modulith.messaging.api.model;
 
 import io.craftgate.modulith.messaging.api.MessagePublisher;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
@@ -15,14 +16,15 @@ import java.util.stream.Stream;
 @ToString(callSuper = true)
 public abstract class AggregateRoot {
 
+    @EqualsAndHashCode.Exclude
     private Queue<Message> messages = new LinkedList<>();
+
+    @EqualsAndHashCode.Exclude
     private Queue<Message> consumedMessages = new LinkedList<>();
 
     public void registerMessage(Message message) {
         this.messages.offer(message);
     }
-
-    public abstract String key();
 
     public void publishMessages() {
         Stream.generate(() -> messages.poll())

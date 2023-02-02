@@ -1,6 +1,6 @@
 package io.craftgate.modulith.messaging.test.integration;
 
-import io.craftgate.modulith.messaging.test.AbstractTest;
+import io.craftgate.modulith.messaging.test.unit.AbstractUnitTest;
 import io.craftgate.modulith.messaging.test.integration.sample.chained.TransactionalChainedApplication;
 import io.craftgate.modulith.messaging.test.integration.sample.chained.infra.jpa.UserEntity;
 import io.craftgate.modulith.messaging.test.integration.sample.chained.infra.jpa.UserJpaRepository;
@@ -28,7 +28,7 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
 @ExtendWith(SpringExtension.class)
 @Transactional(propagation = Propagation.NOT_SUPPORTED)
 @SpringBootTest(webEnvironment = RANDOM_PORT, classes = TransactionalChainedApplication.class)
-public class TransactionalChainedIT extends AbstractTest {
+public class TransactionalChainedIT extends AbstractIT {
 
     @Autowired
     private TestRestTemplate testRestTemplate;

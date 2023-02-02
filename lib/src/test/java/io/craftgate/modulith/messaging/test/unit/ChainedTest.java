@@ -1,6 +1,5 @@
 package io.craftgate.modulith.messaging.test.unit;
 
-import io.craftgate.modulith.messaging.test.AbstractTest;
 import io.craftgate.modulith.messaging.api.MessagePublisher;
 import io.craftgate.modulith.messaging.api.registry.MessageHandlerRegistry;
 import io.craftgate.modulith.messaging.api.registry.NoMessageHandlerRegistry;
@@ -14,7 +13,7 @@ import io.craftgate.modulith.messaging.test.unit.sample.chained.notifyuser.Notif
 import io.craftgate.modulith.messaging.test.unit.sample.chained.notifyuser.UserNotifiedDomainEvent;
 import io.craftgate.modulith.messaging.test.unit.sample.chained.outbox.OutboxUserNotifiedHandler;
 import io.craftgate.modulith.messaging.test.unit.sample.chained.shared.User;
-import io.craftgate.modulith.messaging.api.util.CurrentDateTimeProvider;
+import io.craftgate.modulith.messaging.api.util.CurrentDateTimeManager;
 import io.craftgate.modulith.messaging.api.util.MessageTestCollector;
 import org.junit.jupiter.api.Test;
 
@@ -22,7 +21,7 @@ import java.time.LocalDateTime;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ChainedTest extends AbstractTest {
+public class ChainedTest extends AbstractUnitTest {
 
     @Test
     void should_create_user_when_handlers_are_chained() {
@@ -38,7 +37,7 @@ public class ChainedTest extends AbstractTest {
         // given
         MessageTestCollector.activate();
         LocalDateTime now = LocalDateTime.of(2023, 1, 1, 0, 0, 0);
-        CurrentDateTimeProvider.setCustomLocalDateTime(now);
+        CurrentDateTimeManager.setCustomLocalDateTime(now);
         var usecase = CreateUserUseCase.builder()
                 .username("rcarlos")
                 .name("Roberto")

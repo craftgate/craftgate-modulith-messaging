@@ -9,7 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RequiredArgsConstructor
-@MessageHandlerConfig(selector = CreateUserUseCase.class, isChained = true)
+@MessageHandlerConfig(selector = CreateUserUseCase.class, isChained = true, isTransactional = true)
 public class CreateUserHandler extends MessageHandler<CreateUserUseCase, User> {
 
     private final UserPort userPort;

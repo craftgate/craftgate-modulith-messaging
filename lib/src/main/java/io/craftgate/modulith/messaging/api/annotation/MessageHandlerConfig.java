@@ -9,7 +9,7 @@ import java.lang.annotation.Target;
 @Target(ElementType.TYPE)
 public @interface MessageHandlerConfig {
 
-    Class<?> selector() default void.class;
+    Class<?>[] selector() default void.class;
 
     String[] key() default "";
 

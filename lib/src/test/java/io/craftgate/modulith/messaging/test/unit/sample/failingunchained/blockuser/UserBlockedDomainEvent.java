@@ -1,9 +1,9 @@
-package io.craftgate.modulith.messaging.test.unit.sample.unchained.blockuser;
+package io.craftgate.modulith.messaging.test.unit.sample.failingunchained.blockuser;
 
 import io.craftgate.modulith.messaging.api.annotation.MessageType;
 import io.craftgate.modulith.messaging.api.model.Message;
-import io.craftgate.modulith.messaging.test.unit.sample.unchained.shared.User;
 import io.craftgate.modulith.messaging.api.util.CurrentDateTimeManager;
+import io.craftgate.modulith.messaging.test.unit.sample.failingunchained.shared.User;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;

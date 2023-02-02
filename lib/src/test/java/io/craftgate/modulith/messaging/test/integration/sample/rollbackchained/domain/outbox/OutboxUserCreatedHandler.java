@@ -14,6 +14,6 @@ public class OutboxUserCreatedHandler extends VoidMessageHandler<UserNotifiedDom
     @Override
     public void handle(UserNotifiedDomainEvent useCase) {
         log.info("Outbox save is happened");
-        throw new RuntimeException("fail fail fail");
+        throw new OutboxFailureException("fail fail fail");
     }
 }

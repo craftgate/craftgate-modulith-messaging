@@ -10,7 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RequiredArgsConstructor
-@MessageHandlerConfig(selector = UserCreatedDomainEvent.class, isChained = true)
+@MessageHandlerConfig(selector = UserCreatedDomainEvent.class, isChained = true, isTransactional = true)
 public class NotifyUserHandler extends VoidMessageHandler<UserCreatedDomainEvent> {
 
     private final UserPort userPort;

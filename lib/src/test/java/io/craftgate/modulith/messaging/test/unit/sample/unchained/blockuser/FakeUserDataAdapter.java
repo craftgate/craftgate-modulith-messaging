@@ -12,12 +12,12 @@ public class FakeUserDataAdapter implements UserPort {
     private Map<String, User> data = new HashMap<>();
 
     public void initialize(User... users) {
-        Arrays.stream(users).forEach(user -> data.put(user.key(), user));
+        Arrays.stream(users).forEach(user -> data.put(user.getUsername(), user));
     }
 
     @Override
     public void saveUser(User user) {
-        data.put(user.key(), user);
+        data.put(user.getUsername(), user);
     }
 
     @Override

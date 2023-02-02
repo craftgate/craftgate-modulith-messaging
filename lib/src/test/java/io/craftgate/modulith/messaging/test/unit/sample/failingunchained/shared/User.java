@@ -1,7 +1,7 @@
-package io.craftgate.modulith.messaging.test.unit.sample.unchained.shared;
+package io.craftgate.modulith.messaging.test.unit.sample.failingunchained.shared;
 
 import io.craftgate.modulith.messaging.api.model.AggregateRoot;
-import io.craftgate.modulith.messaging.test.unit.sample.unchained.blockuser.UserBlockedDomainEvent;
+import io.craftgate.modulith.messaging.test.unit.sample.failingunchained.blockuser.UserBlockedDomainEvent;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
