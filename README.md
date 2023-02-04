@@ -163,7 +163,7 @@ should use `key` field of the annotation in String type to set an identifier for
 boolean field is used for running the current module in a separate thread.
 
 `isTransactional=true` boolean field makes the whole handling transactional being managed by Spring Framework's
-`String-Tx` module. When you make your module transactional, it participates the current transaction if exists, or
+`Spring-Tx` module. When you make your module transactional, it participates the current transaction if exists, or
 creates a new transaction. It means, in case of a failure, rollback flow will be triggered. For now, Spring is the only
 external library used for Transaction Management.
 
