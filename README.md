@@ -308,13 +308,17 @@ Used technologies in the codebase:
 
 ## Contributing
 
-If you wish to contribute to this repository, please fork the repository, make your changes and create a pull request.
+If you wish to contribute to this repository, please fork the repository, make your changes and create a pull request. See the [contribution guide](CONTRIBUTING.md) for details.
 
 ## Code of Conduct
 
-Please take a look at [code of conduct](CODE_OF_CONDUCT.md) before opening issues or creating pull requests.
+Please take a look at our [Code of Conduct](CODE_OF_CONDUCT.md) before opening issues or creating pull requests.
+
+## Security
+
+If you discover a security vulnerability, please review our [Security Policy](SECURITY.md) for how to report it responsibly.
 
 ## License
 
 This project is maintained by the crafters of [Craftgate](https://craftgate.io) and licensed under
-the [MIT license](/LICENSE).
+the [Apache License, Version 2.0](/LICENSE). See [LICENSE](/LICENSE) and [NOTICE](/NOTICE.md) for details.
