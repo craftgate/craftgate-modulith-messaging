@@ -39,7 +39,7 @@ expected to uphold this code.
 
 ## License
 
-By contributing to this project, you agree to license your contributions under the [MIT License](/LICENSE).
+By contributing to this project, you agree to license your contributions under the [Apache License, Version 2.0](/LICENSE).
 
 ## Thank you!
 
