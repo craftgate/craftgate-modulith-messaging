@@ -1,7 +1,5 @@
 # Craftgate Modulith Messaging
 
-![logo](/logo.jpg)
-
 This repository is a Java library for managing communication between internal modules.
 
 ## The Problem: High Coupling
